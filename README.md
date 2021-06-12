@@ -51,3 +51,11 @@ validações para rush 01 - 42SP
     x[ ][ ][4][ ]x
     x[ ][ ][ ][ ]x
       x  x  2  x
+
+    Todos os lados devem somar 10 (colunas e linhas)
+
+    [01][02][03][04]10
+    [02][01][04][03]10
+    [03][04][02][01]10
+    [04][03][01][02]10
+     10  10  10  10
