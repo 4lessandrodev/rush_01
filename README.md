@@ -32,13 +32,33 @@ validações para rush 01 - 42SP
     4[1][2][3][4]1
       x  3  x  x
       
-    Sempre que a label for 1 e o lado oposto for 3, a label 3 recebe
-    o valor de 2
+    Sempre que a label for 1 e o lado oposto for 2, a label 2 recebe
+    o valor de 3
     
       x  1  x  x
     x[ ][4][ ][ ]x
     x[ ][ ][ ][ ]x
-    1[4][ ][ ][2]3
+    1[4][ ][ ][3]2
+    x[ ][ ][ ][ ]x
+      x  x  x  x
+      
+    Sempre que a label for 1 e o lado oposto for 3, haverá uma sequência
+    4,2,3,1: conforme o padrão abaixo 
+    
+      x  x  x  x
+    x[ ][ ][ ][ ]x
+    1[4][2][3][1]3
+    x[ ][ ][ ][ ]x
+    x[ ][ ][ ][ ]x
+      x  x  x  x
+    
+    Sempre que a label for 3 e o lado oposto for 1, haverá uma sequência
+    4,2,3,1: conforme o padrão abaixo 
+    
+      x  x  x  x
+    x[ ][ ][ ][ ]x
+    1[1][3][2][4]3
+    x[ ][ ][ ][ ]x
     x[ ][ ][ ][ ]x
       x  x  x  x
       
@@ -68,3 +88,5 @@ validações para rush 01 - 42SP
     [03][04][02][01]10
     [04][03][01][02]10
      10  10  10  10
+     
+    
