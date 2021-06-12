@@ -1,22 +1,21 @@
 //Regras: 4 x 4
 /*
-//A extremidade que tem label 1 deve ser 4
+A extremidade que tem label 1 deve ser 4
 
-[[[*][x][1][x][x][*]] > labels
- [[x][ ][4][ ][ ][x]]
- [[1][4][ ][ ][ ][x]]
- [[x][ ][ ][ ][4][1]]
- [[x][ ][ ][4][ ][1]]
- [[*][x][x][1][x][*]]] > labels
- v              v
- label          labels
+[
+	[[*][x][1][x][x][*]]
+ 	[[x][ ][4][ ][ ][x]]
+ 	[[1][4][ ][ ][ ][x]]
+ 	[[x][ ][ ][ ][4][1]]
+ 	[[x][ ][ ][4][ ][1]]
+ 	[[*][x][x][1][x][*]]
+]
+
 */
 /*
 * @param matrix ponteiro da matriz
-* @param max_col quantidade maxima de coluna (4) caso seja 4x4
-* @param max_row quantidade maxima de linha (4) caso seja 4x4
 */
-void	put_max_on_label1(int **matrix, int max_col, int max_row)
+void	put_max_on_label1(int **matrix)
 {
 	int	row;
 	int	col;
@@ -58,15 +57,65 @@ void	put_max_on_label1(int **matrix, int max_col, int max_row)
  /*
 Sempre que tiver 4 em uma extremidade e 1 no lado oposto 
 tem-se uma sequência 
+[
+	[ ][x][1][x][x][ ]
+	[x][ ][4][ ][ ][x]
+	[x][ ][3][ ][ ][x]
+	[4][1][2][3][4][1]
+	[x][ ][1][ ][ ][x]
+	[ ][x][4][x][x][ ]
+]
+*/
+void	put_sequence_on_label1_4(int **matrix)
+{
+	int	row;
+	int	col;
 
-  x  1  x  x
-x[ ][4][ ][ ]x
-x[ ][3][ ][ ]x
-4[1][2][3][4]1
-x[ ][1][ ][ ]x
-  x  4  x  x
-  */
-
+	row = 1;
+	while (row <= 4)
+	{
+		col = 1;
+		while (col <= 4)
+		{
+			if (row == 1 || row == 4) // primeira ou ultima linha da tabela
+			{
+				if (matrix[0][col] == 1 && matrix[5][col] == 4)
+				{
+					matrix[1][col] = 4;
+					matrix[2][col] = 3;
+					matrix[3][col] = 2;
+					matrix[4][col] = 1;
+				}
+				if (matrix[5][col] == 1 && matrix[0][col] == 4)
+				{
+					matrix[4][col] = 4;
+					matrix[3][col] = 3;
+					matrix[2][col] = 2;
+					matrix[1][col] = 1;
+				}
+			}
+			if (col == 1 || col == 4) // primeira ou ultima coluna da tabela
+			{
+				if (matrix[0][row] == 1 && matrix[5][row] == 4)
+				{
+					matrix[1][row] = 4;
+					matrix[2][row] = 3;
+					matrix[3][row] = 2;
+					matrix[4][row] = 1;
+				}
+				if (matrix[5][row] == 1 && matrix[0][row] == 4)
+				{
+					matrix[4][row] = 4;
+					matrix[3][row] = 3;
+					matrix[2][row] = 2;
+					matrix[1][row] = 1;
+				}
+			}
+			col++;
+		}
+		row++;
+	}
+}
  /*
 Sempre que a linha ou a coluna faltar apenas um número deve-se
 preencher com o número faltante. A = 1
