@@ -53,11 +53,11 @@ validações para rush 01 - 42SP
       x  x  x  x
     
     Sempre que a label for 3 e o lado oposto for 1, haverá uma sequência
-    4,2,3,1: conforme o padrão abaixo 
+    1,3,2,4: conforme o padrão abaixo 
     
       x  x  x  x
     x[ ][ ][ ][ ]x
-    1[1][3][2][4]3
+    3[1][3][2][4]1
     x[ ][ ][ ][ ]x
     x[ ][ ][ ][ ]x
       x  x  x  x
