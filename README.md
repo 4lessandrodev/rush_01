@@ -51,6 +51,15 @@ validações para rush 01 - 42SP
     x[ ][ ][4][ ]x
     x[ ][ ][ ][ ]x
       x  x  2  x
+      
+    Não pode existir número repetido para linha e coluna
+    
+      x  x  x  x
+    x[1][2][3][4]x
+    x[2][1][4][3]x
+    x[3][4][2][1]x
+    x[4][3][1][2]x
+      x  x  x  x
 
     Todos os lados devem somar 10 (colunas e linhas)
 
