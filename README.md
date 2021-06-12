@@ -45,7 +45,7 @@ validações para rush 01 - 42SP
     Coloca o 4 na posição correta sempre que tiver a label de um lado
     com o valor 3 e na outra extremidade a label com valor 2
     
-      x     3  x
+      x  x  3  x
     x[ ][ ][ ][ ]x
     2[ ][4][ ][ ]3
     x[ ][ ][4][ ]x
