@@ -1,21 +1,23 @@
+
+//https://www.typescriptlang.org/play
 /**
 [
 	[0, 2, 1, 2, 3, 0], 
 	[2, 3, 4, 0, 0, 2], 
 	[2, 0, 0, 0, 0, 2], 
-	[1, 4, 0, 0, 0, 4], 
+	[1, 4, 3, 2, 1, 4], 
 	[4, 1, 2, 3, 4, 1], 
 	[0, 2, 3, 2, 1, 0]
 ]
- */
+*/
 // [linha][coluna]
 const matrix:Array<Array<number>> = [
-	[0,2,1,2,3,0],
-	[2,0,0,0,0,2],
- 	[2,0,0,0,0,2],
+	[0,2,4,3,1,0],
+	[3,0,0,0,0,1],
+ 	[3,0,0,0,0,2],
  	[1,0,0,0,0,4],
- 	[4,0,0,0,0,1],
-	[0,2,3,2,1,0] 
+ 	[2,0,0,0,0,2],
+	[0,2,1,3,3,0] 
 ];
 
 function	put_max_on_label1(matrix: Array<Array<number>>)
@@ -167,20 +169,68 @@ function	put_3_on_corner(matrix: Array<Array<number>>)
 }
 
 put_3_on_corner(matrix);
-console.log(matrix);
+
 
 
 
 // [linha][coluna]
 /**
- * 
-const matriz:Array<Array<number>> = [
-	[0,1,2,3,4,0],
-	[5,6,7,8,9,10],
- 	[11,13,14,15,16,17],
- 	[18,19,20,21,22,23],
- 	[24,25,26,27,28,29],
-	[0,30,31,32,33,0] 
-];
+ /*
+Coloca o 4 na posição correta sempre que tiver a label de um lado
+com o valor 3 e na outra extremidade a label com valor 2
+
+[0][x][x][3][x][0]
+[x][ ][ ][ ][ ][x]
+[2][ ][4][ ][ ][3]
+[x][ ][ ][4][ ][x]
+[x][ ][ ][ ][ ][x]
+[0][x][2][x][ ][0]
+*/
+function put_four_3_2(matrix: Array<Array<number>>)
+{
+	let coluna = 1;
+	let linha;
+	while (coluna <= 4)
+	{
+		linha = 1;
+		while (linha <= 4)
+		{
+			// colocar 4 validando colunas [linha][coluna]
+			if (matrix[0][coluna] == 3 && matrix[5][coluna] == 2)
+			{
+				matrix[3][coluna] = 4;
+			}
+			if (matrix[0][coluna] == 2 && matrix[5][coluna] == 3)
+			{
+				matrix[2][coluna] = 4;
+			}
+			// colocar 4 validando linhas [linha][coluna]
+			if (matrix[linha][0] == 3 && matrix[linha][5] == 2)
+			{
+				matrix[linha][3] = 4;
+			}
+			if (matrix[linha][0] == 2 && matrix[linha][5] == 3)
+			{
+				matrix[linha][2] = 4;
+			}
+			linha++;
+		}
+		coluna++;
+	}
+}
+
+put_four_3_2(matrix);
+console.log(matrix);
+
+/**
+ 
+[
+	[0, 2, 4, 3, 1, 0], 
+	[3, 0, 1, 3, 4, 1], 
+	[3, 0, 2, 4, 0, 2], 
+	[1, 4, 3, 2, 1, 4], 
+	[2, 3, 4, 1, 0, 2], 
+	[0, 2, 1, 3, 3, 0]
+] 
 
  */
