@@ -192,6 +192,96 @@ x[ ][A][ ][ ]x
   x  3  x  x
   */
 
+void	put_last_number_column(int **matrix)
+{
+	int	numbers[4];
+	int	column;
+	int	row;
+	int	qtd_zeros;
+	int	index;
+	int	fault_number;
+
+	column = 1;
+	fault_number = 0;
+	row = 1;
+	while (column <= 4)
+	{
+		row = 1;
+		qtd_zeros = 0;
+		index = 0;
+		while (row <= 4)
+		{
+			if (matrix[row][column] == 0)
+			{
+				qtd_zeros++;
+			}
+			else
+			{
+				numbers[index] = matrix[row][column];
+				index++;
+			}
+			row++;
+		}
+		if (qtd_zeros == 1)
+		{
+			fault_number = (10 - (numbers[0] + numbers[1] + numbers[2]));
+			row = 1;
+			while (row <= 4)
+			{
+				if (matrix[row][column] == 0)
+				{
+					matrix[row][column] = fault_number;
+				}
+				row++;
+			}
+		}
+		column++;
+	}
+}
+
+void	put_last_number_row(int **matrix)
+{
+	int	numbers[4];
+	int	column = 1;
+	int	row = 1;
+	int	qtd_zeros;
+	int	index;
+	int	fault_number = 0;
+
+	while (row <= 4)
+	{
+		column = 1;
+		qtd_zeros = 0;
+		index = 0;
+		while (column <= 4)
+		{
+			if (matrix[row][column] == 0)
+			{
+				qtd_zeros++;
+			}
+			else
+			{
+				numbers[index] = matrix[row][column];
+				index++;
+			}
+			column++;
+		}
+		if (qtd_zeros == 1)
+		{
+			fault_number = (10 - (numbers[0] + numbers[1] + numbers[2]));
+			column = 1;
+			while (column <= 4)
+			{
+				if (matrix[row][column] == 0)
+				{
+					matrix[row][column] = fault_number;
+				}
+				column++;
+			}
+		}
+		row++;
+	}
+}
 
  /*
 Coloca o 4 na posição correta sempre que tiver a label de um lado
