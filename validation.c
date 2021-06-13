@@ -18,39 +18,39 @@ A extremidade que tem label 1 deve ser 4
 void	put_max_on_label1(int **matrix)
 {
 	int	row;
-	int	col;
+	int	column;
 
 	row = 1;
+	column = 1;
+	//direita e esquerda (linhas)
 	while (row <= 4)
 	{
-		col = 1;
-		while (col <= 4)
+		// linha direita [linha][coluna]
+		if (matrix[row][5] == 1) 
 		{
-			if (row == 1 || row == 4) // primeira ou ultima linha da tabela
-			{
-				if (matrix[0][col] == 1) // label de cima
-				{
-					matrix[1][col] = 4;
-				}
-				if (matrix[5][col] == 1) // label de baixo
-				{
-					matrix[4][col] = 4;
-				}
-			}
-			if (col == 1 || col == 4) // primeira ou ultima coluna da tabela
-			{
-				if (matrix[0][row] == 1) // label da esquerda
-				{
-					matrix[1][row] = 4;
-				}
-				if (matrix[5][row] == 1) // label da direita
-				{
-					matrix[4][row] = 4;
-				}
-			}
-			col++;
+			matrix[row][4] = 4;
+		}
+		// row esquerda [row][coluna]
+		if (matrix[row][0] == 1)
+		{
+			matrix[row][1] = 4;
 		}
 		row++;
+	}
+	// cima e baixo (colunas)
+	while (column <= 4)
+	{
+		// baixo [linha][column]
+		if (matrix[5][column] == 1)
+		{
+			matrix[4][column] = 4;
+		}
+		// cima [linha][column]
+		if (matrix[0][column] == 1) 
+		{
+			matrix[1][column] = 4;
+		}
+		column++;
 	}
 }
 
@@ -69,53 +69,117 @@ tem-se uma sequência
 void	put_sequence_on_label1_4(int **matrix)
 {
 	int	row;
-	int	col;
+	int	column;
 
 	row = 1;
-	while (row <= 4)
+	column = 1;
+
+	while(column <= 4)
 	{
-		col = 1;
-		while (col <= 4)
+		// cima esquerdo && baixo esquerdo [linha][column]
+		if (matrix[0][column] == 1 && matrix[5][column] == 4)
 		{
-			if (row == 1 || row == 4) // primeira ou ultima linha da tabela
-			{
-				if (matrix[0][col] == 1 && matrix[5][col] == 4)
-				{
-					matrix[1][col] = 4;
-					matrix[2][col] = 3;
-					matrix[3][col] = 2;
-					matrix[4][col] = 1;
-				}
-				if (matrix[5][col] == 1 && matrix[0][col] == 4)
-				{
-					matrix[4][col] = 4;
-					matrix[3][col] = 3;
-					matrix[2][col] = 2;
-					matrix[1][col] = 1;
-				}
-			}
-			if (col == 1 || col == 4) // primeira ou ultima coluna da tabela
-			{
-				if (matrix[0][row] == 1 && matrix[5][row] == 4)
-				{
-					matrix[1][row] = 4;
-					matrix[2][row] = 3;
-					matrix[3][row] = 2;
-					matrix[4][row] = 1;
-				}
-				if (matrix[5][row] == 1 && matrix[0][row] == 4)
-				{
-					matrix[4][row] = 4;
-					matrix[3][row] = 3;
-					matrix[2][row] = 2;
-					matrix[1][row] = 1;
-				}
-			}
-			col++;
+			matrix[1][column] = 4;
+			matrix[2][column] = 3;
+			matrix[3][column] = 2;
+			matrix[4][column] = 1;
+		}
+		// baixo esquerdo && cima esquerdo [linha][column]
+		if (matrix[5][column] == 1 && matrix[0][column] == 4)
+		{
+			matrix[1][column] = 1;
+			matrix[2][column] = 2;
+			matrix[3][column] = 3;
+			matrix[4][column] = 4;
+		}
+		column++;
+	}
+	while(row <= 4)
+	{
+		// lateral esquerda cima && lateral direita cima
+		// [row][coluna]
+		if (matrix[row][5] == 1 && matrix[row][0] == 4)
+		{
+			matrix[row][1] = 1;
+			matrix[row][2] = 2;
+			matrix[row][3] = 3;
+			matrix[row][4] = 4;
+		}
+		// lateral direita cima && lateral esquerda cima
+		// [row][coluna]
+		if (matrix[row][0] == 1 && matrix[row][5] == 4)
+		{
+			matrix[row][1] = 4;
+			matrix[row][2] = 3;
+			matrix[row][3] = 2;
+			matrix[row][4] = 1;
 		}
 		row++;
 	}
 }
+ /*
+Sempre que o canto tiver o padrão de label 2 x 2 o valor do canto 
+será 3. Exceto que tenha dois cantos com a label 2 x 2
+
+[
+	[ ][2][x][x][x][ ]
+	[2][3][ ][ ][ ][x]
+	[x][ ][ ][ ][ ][x]
+	[x][ ][ ][ ][ ][x]
+	[x][ ][ ][ ][ ][x]
+	[ ][x][x][x][x][ ]
+]
+*/
+
+void	put_3_on_corner(int **matrix)
+{
+	int	qtd_corner;
+
+	qtd_corner = 0;
+
+	if (matrix[0][1] == 2 && matrix[1][0] == 2)
+	{
+		qtd_corner++;
+	}
+
+	if (matrix[0][4] == 2 && matrix[1][5] == 2)
+	{
+		qtd_corner++;
+	}
+
+	if (matrix[5][4] == 2 && matrix[4][5] == 2)
+	{
+		qtd_corner++;
+	}
+
+	if (matrix[4][0] == 2 && matrix[5][1] == 2)
+	{
+		qtd_corner++;
+	}
+	if (qtd_corner == 1)
+	{
+		if (matrix[0][1] == 2 && matrix[1][0] == 2)
+		{
+			matrix[1][1] = 3;
+		}
+
+		if (matrix[0][4] == 2 && matrix[1][5] == 2)
+		{
+			matrix[1][4] = 3;
+		}
+
+		if (matrix[5][4] == 2 && matrix[4][5] == 2)
+		{
+			matrix[4][4] = 3;
+		}
+
+		if (matrix[4][0] == 2 && matrix[5][1] == 2)
+		{
+			matrix[4][1] = 3;
+		}
+	}
+}
+
  /*
 Sempre que a linha ou a coluna faltar apenas um número deve-se
 preencher com o número faltante. A = 1
@@ -128,41 +192,6 @@ x[ ][A][ ][ ]x
   x  3  x  x
   */
 
- /*
-Sempre que a label for 1 e o lado oposto for 2, a label 2 recebe
-o valor de 3
-
-  x  1  x  x
-x[ ][4][ ][ ]x
-x[ ][ ][ ][ ]x
-1[4][ ][ ][3]2
-x[ ][ ][ ][ ]x
-  x  x  x  x
-  */
-
- /*
-Sempre que a label for 1 e o lado oposto for 3, haverá uma sequência
-4,2,3,1: conforme o padrão abaixo 
-
-  x  x  x  x
-x[ ][ ][ ][ ]x
-1[4][2][3][1]3
-x[ ][ ][ ][ ]x
-x[ ][ ][ ][ ]x
-  x  x  x  x
-*/
-
-/*
-Sempre que a label for 3 e o lado oposto for 1, haverá uma sequência
-1,3,2,4: conforme o padrão abaixo 
-
-  x  x  x  x
-x[ ][ ][ ][ ]x
-3[1][3][2][4]1
-x[ ][ ][ ][ ]x
-x[ ][ ][ ][ ]x
-  x  x  x  x
-  */
 
  /*
 Coloca o 4 na posição correta sempre que tiver a label de um lado
@@ -174,10 +203,44 @@ x[ ][ ][ ][ ]x
 x[ ][ ][4][ ]x
 x[ ][ ][ ][ ]x
   x  x  2  x
-  */
+*/
+
+void	put_four_3_2(int **matrix)
+{
+	int	column;
+	int	row;
+
+	while (column <= 4)
+	{
+		row = 1;
+		while (row <= 4)
+		{
+			// colocar 4 validando columns [row][column]
+			if (matrix[0][column] == 3 && matrix[5][column] == 2)
+			{
+				matrix[3][column] = 4;
+			}
+			if (matrix[0][column] == 2 && matrix[5][column] == 3)
+			{
+				matrix[2][column] = 4;
+			}
+			// colocar 4 validando rows [row][column]
+			if (matrix[row][0] == 3 && matrix[row][5] == 2)
+			{
+				matrix[row][3] = 4;
+			}
+			if (matrix[row][0] == 2 && matrix[row][5] == 3)
+			{
+				matrix[row][2] = 4;
+			}
+			row++;
+		}
+		column++;
+	}
+}
 
  /*
-Não pode existir número repetido para linha e coluna
+Não pode existir número repetido para linha e column
 
   x  x  x  x
 x[1][2][3][4]x
